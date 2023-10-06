@@ -1,0 +1,84 @@
+<div class="flex flex-row mx-20">
+  <div class="w-80 flex flex-col items-center">
+    <img *ngIf="imagen" [src]="imagen" class="product bg-gray-300" />
+    <img *ngIf="!imagen" class="product bg-gray-300" />
+    <div class="mt-5 border border-lime-700 text-lime-700">
+      <label for="img-upload" class="flex flex-col items-center justify-center w-72 h-12 cursor-pointer">
+        <input id="img-upload" type="file" class="hidden" (change)="loadImg($event)" />
+        Cargar Imagen
+      </label>
+    </div>
+  </div>
+  <div class="ml-10 w-80">
+    <form class="flex flex-col w-full" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="flex flex-col">
+        <label for="product-name" class="mb-2 font-medium text-lime-900">Nombre del Producto</label>
+        <input formControlName="name" type="text" id="product-name"
+          class="border border-lime-700 outline-none px-5 py-2 w-full" />
+        <div
+          *ngIf="productForm.controls.name.errors && (productForm.controls.name.dirty || productForm.controls.name.touched)">
+          <span *ngIf="productForm.controls.name.errors['required']" class="text-red-500 text-sm">
+            Nombre requerido
+          </span>
+          <span *ngIf="productForm.controls.name.errors['minlength']" class="text-red-500 text-sm">
+            EL nombre debe tener minimo {{ productForm.controls.name.errors['minlength'].requiredLength }} caracteres
+          </span>
+        </div>
+      </div>
+      <div class="flex flex-col mt-3">
+        <label for="price" class="mb-2 font-medium text-lime-900">Precio</label>
+        <input formControlName="price" type="number" id="price"
+          class="border border-lime-700 outline-none px-5 py-2 w-full" />
+        <div
+          *ngIf="productForm.controls.price.errors && (productForm.controls.price.dirty || productForm.controls.price.touched)">
+          <span *ngIf="productForm.controls.price.errors['required']" class="text-red-500 text-sm">
+            Precio requerido
+          </span>
+          <span *ngIf="productForm.controls.price.errors['min']" class="text-red-500 text-sm">
+            EL precio debe ser minimo {{ productForm.controls.price.errors['min'].min }}
+          </span>
+        </div>
+      </div>
+      <div class="flex flex-col mt-3">
+        <label for="quantity" class="mb-2 font-medium text-lime-900">Cantidad</label>
+        <input formControlName="quantity" type="number" id="quantity"
+          class="border border-lime-700 outline-none px-5 py-2 w-full" />
+        <div
+          *ngIf="productForm.controls.quantity.errors && (productForm.controls.quantity.dirty || productForm.controls.quantity.touched)">
+          <span *ngIf="productForm.controls.quantity.errors['required']" class="text-red-500 text-sm">
+            Cantidad requerida
+          </span>
+          <span *ngIf="productForm.controls.quantity.errors['min']" class="text-red-500 text-sm">
+            La cantidad debe ser minimo {{ productForm.controls.quantity.errors['min'].min }}
+          </span>
+        </div>
+      </div>
+      <div class="flex flex-col mt-3">
+        <label for="desc" class="mb-2 font-medium text-lime-900">Descripcion</label>
+        <textarea formControlName="description" id="desc" rows="4"
+          class="border border-lime-700 outline-none px-5 py-2 w-full"></textarea>
+        <div
+          *ngIf="productForm.controls.description.errors && (productForm.controls.description.dirty || productForm.controls.description.touched)">
+          <span *ngIf="productForm.controls.description.errors['required']" class="text-red-500 text-sm">
+            Descripcion requerido
+          </span>
+          <span *ngIf="productForm.controls.description.errors['minlength']" class="text-red-500 text-sm">
+            La descripcion debe tener minimo {{ productForm.controls.description.errors['minlength'].requiredLength }}
+            caracteres
+          </span>
+          <span *ngIf="productForm.controls.description.errors['maxlength']" class="text-red-500 text-sm">
+            La descripcion debe tener maximo {{ productForm.controls.description.errors['maxlength'].requiredLength }}
+            caracteres
+          </span>
+        </div>
+      </div>
+      <div class="flex flex-row mt-3">
+        <input formControlName="onSale" type="checkbox" id="on-sale" class="border border-lime-700 outline-none" />
+        <label for="on-sale" class="ml-3 font-medium text-lime-900">¿En Promoción?</label>
+      </div>
+      <div class="flex flex-row justify-center mt-10">
+        <input type="submit" value="Guardar" class="border border-lime-700 h-10 w-40 cursor-pointer" />
+      </div>
+    </form>
+  </div>
+</div>

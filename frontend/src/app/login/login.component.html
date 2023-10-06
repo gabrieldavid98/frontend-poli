@@ -1,0 +1,48 @@
+<section class="flex flex-row h-screen justify-center items-center">
+  <div class="flex flex-col items-center w-96 p-10">
+    <img src="/assets/admin-logo.png" />
+    <form class="flex flex-col mt-10 w-full" [formGroup]="loginForm" (ngSubmit)="onSumit()">
+      <div class=" flex flex-col">
+        <label for="email" class="mb-2">Correo Electronico</label>
+        <input formControlName="email" type="email" id="email"
+          class="border border-lime-700 outline-none px-5 py-2 w-full" />
+        <div
+          *ngIf="loginForm.controls.email.errors && (loginForm.controls.email.dirty || loginForm.controls.email.touched)">
+          <span *ngIf="loginForm.controls.email.errors['required']" class="text-red-500 text-sm">
+            Nombre requerido
+          </span>
+          <span *ngIf="loginForm.controls.email.errors['email']" class="text-red-500 text-sm">
+            Debe usar un correo valido
+          </span>
+        </div>
+      </div>
+      <div class="flex flex-col mt-5">
+        <label for="password" class="mb-2">Contraseña</label>
+        <input formControlName="password" type="password" id="password"
+          class=" border border-lime-700 outline-none px-5 py-2 w-full" />
+        <div
+          *ngIf="loginForm.controls.password.errors && (loginForm.controls.password.dirty || loginForm.controls.password.touched)">
+          <span *ngIf="loginForm.controls.password.errors['required']" class="text-red-500 text-sm">
+            Contraseña requerida
+          </span>
+          <span *ngIf="loginForm.controls.password.errors['minlength']" class="text-red-500 text-sm">
+            La contraseña debe tener minimo {{ loginForm.controls.password.errors['minlength'].requiredLength }}
+            caracteres
+          </span>
+        </div>
+      </div>
+      <div class="flex flex-col items-center mt-10">
+        <div *ngIf="status == 404" class="text-lg text-red-500">
+          Usuario o contraseña invalidos
+        </div>
+        <div *ngIf="status == 500" class="text-lg text-red-500">
+          Error interno del servidor
+        </div>
+      </div>
+      <div class="flex flex-row justify-center mt-10">
+        <input type="submit" value="Iniciar Sesión"
+          class="border border-lime-700 h-10 w-40 cursor-pointer hover:bg-lime-700 hover:text-white" />
+      </div>
+    </form>
+  </div>
+</section>

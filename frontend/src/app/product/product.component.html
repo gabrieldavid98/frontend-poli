@@ -1,0 +1,7 @@
+<a [routerLink]="['/products', product.id, 'detail']">
+  <div class="product-detail w-96 h-96 mb-10 box-border flex flex-col border border-lime-800 items-center">
+    <img [src]="product.imagen" class="product" />
+    <span class="text-xl text-lime-700 text-center">{{product.nombre}}</span>
+    <div class="w-9/12 text-xl text-lime-700 text-right mb-5 mt-3">${{product.precio}}</div>
+  </div>
+</a>

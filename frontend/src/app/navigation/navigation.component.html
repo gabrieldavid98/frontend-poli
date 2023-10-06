@@ -1,0 +1,22 @@
+<nav *ngIf="!isAuthenticated" class="h-16 flex flex-row justify-between">
+  <div class="flex flex-col justify-center">
+    <img src="/assets/logo.png" class="logo ml-10" />
+  </div>
+  <div class="mr-48 flex flex-row items-center">
+    <a [routerLink]="['/']" class="py-1 text-lime-700">Inicio</a>
+    <a routerLink fragment="about-us" class="mx-7 py-1 text-lime-700">Acerca de Nosotros</a>
+    <a [routerLink]="['/products']"
+      class="text-lime-700 border border-lime-700 px-7 py-1 hover:bg-lime-700 hover:text-white">Comprar</a>
+  </div>
+</nav>
+<nav *ngIf="isAuthenticated" class="h-16 flex flex-row justify-between">
+  <div class="flex flex-col justify-center">
+    <img src="/assets/admin-logo.png" class="admin-logo ml-10" />
+  </div>
+  <div class="mr-48 flex flex-row items-center">
+    <a [routerLink]="['/products']" class="py-1 mx-7 text-lime-700">Productos</a>
+    <a [routerLink]="['/products/create']"
+      class="text-lime-700 border border-lime-700 px-7 py-1 hover:bg-lime-700 hover:text-white">Crear Producto</a>
+    <a (click)="onLogout()" class="py-1 mx-7 text-lime-700 cursor-pointer">Cerrar Sesión</a>
+  </div>
+</nav>

@@ -1,0 +1,17 @@
+<app-navigation></app-navigation>
+<section class="flex flex-col items-center">
+  <div class="w-fit mb-20">
+    <div class=" text-2xl text-lime-900 m-5 font-medium">Crear Producto</div>
+    <app-product-form (onSubmitForm)="onSubmit($event)"></app-product-form>
+
+  </div>
+  <div *ngIf="status == 200" class="text-xl text-green-500">
+    Produto creado correctamente
+  </div>
+  <div *ngIf="status == 400" class="text-xl text-red-500">
+    Los datos enviados no son correctos
+  </div>
+  <div *ngIf="status == 500" class="text-xl text-red-500">
+    Error interno del servidor
+  </div>
+</section>

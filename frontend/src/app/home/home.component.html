@@ -1,0 +1,23 @@
+<app-navigation></app-navigation>
+<section class="flex flex-row p-10">
+  <div class="flex-1 flex flex-col justify-center items-center">
+    <img src="/assets/slogan.png" class="slogan" />
+    <a href="products.html" class=" w-fit text-white bg-green-700 m-16 px-10 py-3 text-2xl">
+      Ver Productos
+    </a>
+  </div>
+  <div class="flex-1">
+    <img src="/assets/vegetables-1.png">
+  </div>
+</section>
+<section id="about-us">
+  <img src="/assets/about-us.png" class="ml-10 mt-20" />
+</section>
+<section class="flex flex-col mt-10">
+  <div class="text-3xl text-lime-900 m-5 font-medium">Ultimos Productos Agregados</div>
+  <div class="flex flex-row mx-20 justify-between">
+    <app-product *ngFor="let product of last3Products" [product]="product"></app-product>
+  </div>
+  <a [routerLink]="['products']" class="text-lg text-lime-901 m-5 text-right">Ver todos</a>
+</section>
+<app-footer></app-footer>

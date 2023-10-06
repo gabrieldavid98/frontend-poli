@@ -1,0 +1,36 @@
+<app-navigation></app-navigation>
+<section class="flex flex-col p-10 items-center mb-20">
+  <div *ngIf="status == 404" class="text-2xl text-red-500">
+    404 No encontrado
+  </div>
+  <div *ngIf="status == 500" class="text-2xl text-red-500">
+    Error interno del servidor
+  </div>
+  <div *ngIf="product" class="w-fit">
+    <div class="text-2xl text-lime-900 font-medium" [class.m-5]="!isAuthenticated">{{product.nombre}}</div>
+    <div *ngIf="isAuthenticated" class="flex flex-row justify-end mb-10">
+      <button class="border border-blue-500 text-blue-500 w-fit px-5 mr-2 hover:bg-blue-500 hover:text-white"
+        (click)="onEdit()">
+        Editar
+      </button>
+      <button class="border border-red-500 text-red-500 w-fit px-5 hover:bg-red-500 hover:text-white"
+        (click)="onDelete()">
+        Eliminar
+      </button>
+    </div>
+    <div class="flex flex-row mx-20">
+      <img [src]="product.imagen" class="product" />
+      <div class="ml-20 w-96">
+        <p class="text-lg">{{product.descripcion}}</p>
+        <div class="text-lg font-medium text-lime-900 mt-5">Precio</div>
+        <div class="text-md text-lime-900 ml-3">${{product.precio}}</div>
+        <div class="text-lg font-medium text-lime-900 mt-5">Cantidad Disponible</div>
+        <div class="text-md text-lime-900 ml-3">{{product.cantidad}}</div>
+        <div *ngIf="product.enPromocion"
+          class="mt-5 bg-amber-500 text-white font-medium px-10 py-3 text-lg text-center">
+          EN PROMOCIÓN
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
