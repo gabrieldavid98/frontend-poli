@@ -9,13 +9,7 @@ import { Observable, map } from 'rxjs';
 })
 export class ProductsService {
 
-  private authHeader: HttpHeaders;
-
-  constructor(private http: HttpClient) {
-    this.authHeader = new HttpHeaders({
-      'Authorization': `Bearer ${this.getToken()}`
-    });
-  }
+  constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Producto[]> {
     return this.http.get<Producto[]>(PRODUCTS_ENDPOINT)
@@ -33,15 +27,21 @@ export class ProductsService {
   }
 
   createProduct(product: Producto): Observable<Producto> {
-    return this.http.post<Producto>(PRODUCTS_ENDPOINT, product, { headers: this.authHeader })
+    return this.http.post<Producto>(PRODUCTS_ENDPOINT, product, { headers: this.getAuthHeader() })
   }
 
   editProduct(product: Producto): Observable<Producto> {
-    return this.http.put<Producto>(`${PRODUCTS_ENDPOINT}/${product.id}`, product, { headers: this.authHeader })
+    return this.http.put<Producto>(`${PRODUCTS_ENDPOINT}/${product.id}`, product, { headers: this.getAuthHeader() })
   }
 
   deleteProduct(id: number): Observable<Producto> {
-    return this.http.delete<Producto>(`${PRODUCTS_ENDPOINT}/${id}`, { headers: this.authHeader })
+    return this.http.delete<Producto>(`${PRODUCTS_ENDPOINT}/${id}`, { headers: this.getAuthHeader() })
+  }
+
+  private getAuthHeader(): HttpHeaders {
+    return new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    })
   }
 
   private getToken(): string {
